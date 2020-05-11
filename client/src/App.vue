@@ -12,25 +12,6 @@
       <v-list dense>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar
-      app
-      color="pink darken-1"
-      dark
-      inverted-scroll
-      dense
-    >
-      <v-toolbar-title>Online store</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn text small class="float-right" to="/login">
-        Log in
-      </v-btn>
-      <v-btn text small class="float-right" to="/register">
-        Register
-      </v-btn>
-      <v-btn icon @click.stop="drawerRight = !drawerRight" x-large>
-        <i class="fas fa-shopping-basket"></i>
-      </v-btn>
-    </v-app-bar>
     <v-content>
       <v-container fluid>
         <v-row>

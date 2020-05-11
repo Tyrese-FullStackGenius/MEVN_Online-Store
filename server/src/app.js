@@ -1,4 +1,5 @@
 const express = require('express')
+const {check, validationResult} = require('express-validator/check')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
@@ -17,44 +18,17 @@ db.once("open", function (callback) {
     console.log("Connection Succeeded");
 });
 
-const Post = require("../models/post");
 const User = require('../models/user');
 
-// Fetch single post
-app.get('/post/:id', (req, res) => {
-    var db = req.db;
-    Post.findById(req.params.id, 'title description', function (error, post) {
-        if (error) {
-            res.send(error)
-        }
-        res.send(post)
-    })
-})
-
-// Update a post
-app.put('/posts/:id', (req, res) => {
-    var db = req.db;
-    Post.findById(req.params.id, 'title description', function (error, post) {
-        if (error) {
-            res.send(error)
-        }
-
-        post.title = req.body.title
-        post.description = req.body.description
-        post.save(function (error) {
-            if (error) {
-                res.send(error)
-            }
-            res.send({
-                success: true
-            })
-        })
-    })
-})
-
 // Register new user
-app.post('/register', (req, res) => {
-    const db = req.db;
+app.post('/register', [
+    check('email').exists().withMessage('Email field is required').isEmail().withMessage('Invalid email format'),
+    check('password', 'Password field is required.').notEmpty()
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({errors: errors.array()});
+    }
     let email = req.body.email;
     let password = Bcrypt.hashSync(req.body.password, 10);
     let new_user = new User({
@@ -73,33 +47,26 @@ app.post('/register', (req, res) => {
 })
 
 // User log in
-app.post('/login', async (req, res) => {
+app.post('/login', [
+    check('email').isEmail().withMessage('Invalid email format'),
+    check('password', 'Password field is required.').notEmpty()
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({errors: errors.array()});
+    }
     try {
-        const user = await User.findOne({ email: req.body.email }).exec();
+        const user = await User.findOne({email: req.body.email}).exec();
         if (!user) {
             return res.status(400).send({message: 'User not found.'});
         }
         if (!Bcrypt.compareSync(req.body.password, user.password)) {
             return res.status(400).send({message: 'Invalid password.'});
         }
-        res.send({ message: "Logged in." });
+        res.send({message: "Logged in."});
     } catch (e) {
         res.status(500).send(e)
     }
-})
-
-// Delete a post
-app.delete('/posts/:id', (req, res) => {
-    var db = req.db;
-    Post.remove({
-        _id: req.params.id
-    }, function (err, post) {
-        if (err)
-            res.send(err)
-        res.send({
-            success: true
-        })
-    })
 })
 
 app.listen(process.env.PORT || 8081)

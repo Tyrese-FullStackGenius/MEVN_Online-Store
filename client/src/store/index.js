@@ -8,26 +8,26 @@ export default new Vuex.Store({
   state: {
     alert: {
       isVisible: false,
-      message: ''
+      messages: []
     }
   },
   mutations: {
-    showAlert (state, message) {
+    showAlert (state, messages) {
       state.alert = {
         isVisible: true,
-        message: message
+        messages: messages
       }
     },
     hideAlert (state) {
       state.alert = {
         isVisible: false,
-        message: ''
+        messages: []
       }
     }
   },
   getters: {
     alert: state => {
-      return state.alert;
+      return state.alert
     }
   }
 })

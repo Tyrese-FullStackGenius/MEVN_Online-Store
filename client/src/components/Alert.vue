@@ -1,15 +1,20 @@
 <template>
-  <v-alert
-    v-model="alert.isVisible"
-    close-text="Close Alert"
-    color="deep-purple accent-4"
-    dark
-    dismissible
-    tile
-    clipped
-  >
-  {{ alert.message }}
-  </v-alert>
+  <div>
+    <v-alert
+      v-for="(message, index) in alert.messages"
+      :key="index"
+      v-model="alert.isVisible"
+      close-text="Close Alert"
+      color="deep-purple accent-4"
+      class="mb-0"
+      dark
+      dismissible
+      tile
+      clipped
+    >
+      {{ message }}
+    </v-alert>
+  </div>
 </template>
 
 <script>
