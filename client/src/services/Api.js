@@ -12,6 +12,8 @@ api.interceptors.response.use(response => {
   let errors = []
   if (res.response.data.errors) {
     res.response.data.errors.forEach(e => errors.push(e.msg))
+  } else if (res.response.message) {
+    errors = [res.response.message]
   } else {
     errors = [res.response.statusText]
   }

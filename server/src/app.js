@@ -23,7 +23,8 @@ const User = require('../models/user');
 // Register new user
 app.post('/register', [
     check('email').exists().withMessage('Email field is required').isEmail().withMessage('Invalid email format'),
-    check('password', 'Password field is required.').notEmpty()
+    check('password', 'Password needs to be at least 5 characters long.')
+        .isLength({min: 5})
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
