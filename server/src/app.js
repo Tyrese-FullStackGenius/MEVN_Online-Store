@@ -31,14 +31,15 @@ app.post('/register', [
         return res.status(422).json({errors: errors.array()});
     }
     let email = req.body.email;
-    let password = Bcrypt.hashSync(req.body.password, 10);
     User.findOne({ email: email }).then(user => {
         if (user) {
             return res.status(400).send({message: 'User with given email already exists.'});
         }
+        return Bcrypt.hash(req.body.password, 12);
+    }).then(hashedPassword => {
         let new_user = new User({
             email: email,
-            password: password
+            password: hashedPassword
         })
         new_user.save(error => {
             if (error) {
