@@ -32,19 +32,24 @@ app.post('/register', [
     }
     let email = req.body.email;
     let password = Bcrypt.hashSync(req.body.password, 10);
-    let new_user = new User({
-        email: email,
-        password: password
-    })
-    new_user.save(error => {
-        if (error) {
-            res.send(error)
+    User.findOne({ email: email }).then(user => {
+        if (user) {
+            return res.status(400).send({message: 'User with given email already exists.'});
         }
-        res.send({
-            success: true,
-            message: 'User has been registered'
+        let new_user = new User({
+            email: email,
+            password: password
         })
-    })
+        new_user.save(error => {
+            if (error) {
+                res.send(error)
+            }
+            res.send({
+                success: true,
+                message: 'User has been registered'
+            })
+        })
+    }).catch(error => console.log(error))
 })
 
 // User log in
