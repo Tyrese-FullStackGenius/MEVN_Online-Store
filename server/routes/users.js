@@ -19,6 +19,7 @@ router.post('/login', [
         .isEmail(),
     check('password', 'Password field is required.')
         .notEmpty()
+        .isLength({min: 8, max: 20})
 ], usersController.login)
 
 module.exports = router;
