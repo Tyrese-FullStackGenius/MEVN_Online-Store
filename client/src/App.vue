@@ -28,6 +28,9 @@
             <v-btn text small class="float-right" to="/login">
               Log in
             </v-btn>
+            <v-btn text small class="float-right" to="/account/settings">
+              Account
+            </v-btn>
           </v-col>
         </v-row>
         <router-view/>
