@@ -10,7 +10,6 @@ export default new Vuex.Store({
       isVisible: false,
       messages: []
     },
-    status: '',
     token: localStorage.getItem('token') || '',
     user: {}
   },
@@ -26,6 +25,14 @@ export default new Vuex.Store({
         isVisible: false,
         messages: []
       }
+    },
+    authSuccess (state, token, user) {
+      state.token = token
+      state.user = user
+    },
+    logout (state) {
+      state.token = ''
+      state.user = {}
     }
   },
   getters: {
@@ -34,6 +41,11 @@ export default new Vuex.Store({
     authStatus: state => state.status
   },
   actions: {
-
+    authSuccess ({ commit }, token, user) {
+      commit('authSuccess', token, user)
+    },
+    logout ({ commit }) {
+      commit('logout')
+    }
   }
 })

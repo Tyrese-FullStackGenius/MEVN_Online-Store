@@ -1,6 +1,7 @@
 const {validationResult} = require('express-validator')
 const bcrypt = require("bcryptjs");
 const User = require('../models/user');
+const jwt = require('jsonwebtoken')
 
 exports.register = (req, res, next) => {
     throwValidationError(req, res);
@@ -19,7 +20,7 @@ exports.register = (req, res, next) => {
             userModel.save(error => {
                 if (error) {
                     return res.status(500).json({
-                       message: 'Internal error.'
+                        message: 'Internal error.'
                     })
                 }
                 return res.send({
@@ -42,9 +43,16 @@ exports.login = (req, res, next) => {
         }
         return bcrypt.compare(req.body.password, user.password).then(isPasswordValid => {
             if (isPasswordValid) {
-                res.cookie('loggedIn', 'true')
+
+                let token = jwt.sign(
+                    {id: user._id, username: user.email},
+                    'rysiek123',
+                    {expiresIn: 129600});
+
                 return res.status(200).json({
-                    message: 'Logged in.'
+                    message: 'Logged in.',
+                    token,
+                    user
                 })
             } else {
                 return res.status(400).json({

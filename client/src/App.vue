@@ -25,11 +25,14 @@
             <v-btn text small class="float-right" to="/register">
               Register
             </v-btn>
-            <v-btn text small class="float-right" to="/login">
-              Log in
-            </v-btn>
             <v-btn text small class="float-right" to="/account/settings" v-if="isLoggedIn">
               Account
+            </v-btn>
+            <v-btn text small class="float-right" @click="logout" v-if="isLoggedIn">
+              Log out
+            </v-btn>
+            <v-btn text small class="float-right" to="/login" v-else>
+              Log in
             </v-btn>
           </v-col>
         </v-row>
@@ -41,11 +44,19 @@
 
 <script>
 import Alert from './components/Alert'
+
 export default {
   name: 'App',
   components: {Alert},
   props: {
     source: String
+  },
+  methods: {
+    logout () {
+      this.$store.dispatch('logout')
+      this.$router.push({ name: 'Login' })
+      this.$store.commit('showAlert', ['You\'ve been logged out.'])
+    }
   },
   computed: {
     isLoggedIn () {
