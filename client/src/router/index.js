@@ -4,10 +4,11 @@ import Home from '../components/Home'
 import Login from '../components/Login'
 import Register from '../components/Register'
 import AccountSettings from '../components/AccountSettings'
+import store from '../store/index'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   mode: 'history',
   routes: [
     {
@@ -28,7 +29,25 @@ export default new Router({
     {
       path: '/account/settings',
       name: 'AccountSettings',
-      component: AccountSettings
+      component: AccountSettings,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn) {
+      next()
+      return
+    }
+    store.commit('showAlert', ['Page available only for logged in users.'])
+    next('/')
+  } else {
+    next()
+  }
+})
+
+export default router

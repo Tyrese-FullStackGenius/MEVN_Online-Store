@@ -9,7 +9,10 @@ export default new Vuex.Store({
     alert: {
       isVisible: false,
       messages: []
-    }
+    },
+    status: '',
+    token: localStorage.getItem('token') || '',
+    user: {}
   },
   mutations: {
     showAlert (state, messages) {
@@ -26,8 +29,11 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    alert: state => {
-      return state.alert
-    }
+    alert: state => state.alert,
+    isLoggedIn: state => !!state.token,
+    authStatus: state => state.status
+  },
+  actions: {
+
   }
 })

@@ -28,7 +28,7 @@
             <v-btn text small class="float-right" to="/login">
               Log in
             </v-btn>
-            <v-btn text small class="float-right" to="/account/settings">
+            <v-btn text small class="float-right" to="/account/settings" v-if="isLoggedIn">
               Account
             </v-btn>
           </v-col>
@@ -46,6 +46,11 @@ export default {
   components: {Alert},
   props: {
     source: String
+  },
+  computed: {
+    isLoggedIn () {
+      return this.$store.getters.isLoggedIn
+    }
   },
   data: () => ({
     drawerRight: false
