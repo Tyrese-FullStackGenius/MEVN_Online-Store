@@ -26,9 +26,9 @@ export default new Vuex.Store({
         messages: []
       }
     },
-    authSuccess (state, token, user) {
-      state.token = token
-      state.user = user
+    authSuccess (state, payload) {
+      state.token = payload[0]
+      state.user = payload[1]
     },
     logout (state) {
       state.token = ''
@@ -38,11 +38,12 @@ export default new Vuex.Store({
   getters: {
     alert: state => state.alert,
     isLoggedIn: state => !!state.token,
-    authStatus: state => state.status
+    authStatus: state => state.status,
+    token: state => state.token
   },
   actions: {
-    authSuccess ({ commit }, token, user) {
-      commit('authSuccess', token, user)
+    authSuccess ({ commit }, payload) {
+      commit('authSuccess', payload)
     },
     logout ({ commit }) {
       commit('logout')
