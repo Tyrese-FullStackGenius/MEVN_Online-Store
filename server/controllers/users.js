@@ -67,6 +67,24 @@ exports.login = (req, res, next) => {
     })
 }
 
+exports.accountSettings = (req, res, next) => {
+    throwValidationError(req, res);
+    console.log(req.body.token);
+    jwt.verify(req.body.token, 'rysiek123', (err, user) => {
+        if (err) {
+            return res.status(400).json({
+                message: 'User not found.'
+            });
+        }
+        User.findOne({email: user.username}, (err, result) => {
+            return res.status(200).json({
+                user: result
+            })
+        });
+    })
+
+}
+
 const throwValidationError = (req, res) => {
     const errors = validationResult(req);
 

@@ -22,4 +22,8 @@ router.post('/login', [
         .isLength({min: 8, max: 20})
 ], usersController.login)
 
+router.post('/account/settings', [
+    check('token').exists()
+], usersController.accountSettings)
+
 module.exports = router;

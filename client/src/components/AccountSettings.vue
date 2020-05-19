@@ -5,8 +5,15 @@
 </template>
 
 <script>
+import SettingsService from '../services/SettingsService'
+
 export default {
-  name: 'AccountSettings'
+  name: 'AccountSettings',
+  beforeCreate () {
+    SettingsService.account({
+      token: this.$store.getters.token
+    })
+  }
 }
 </script>
 
