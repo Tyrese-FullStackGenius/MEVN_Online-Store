@@ -9,7 +9,7 @@ const usersRoutes = require('../routes/users')
 const app = express()
 
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8082');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
     res.setHeader('Access-Control-Allow-Headers', 'Content-type,Authorization');
     next();
 });
