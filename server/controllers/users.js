@@ -24,7 +24,6 @@ exports.register = (req, res, next) => {
                     })
                 }
                 return res.send({
-                    success: true,
                     message: 'User has been registered.'
                 })
             })
@@ -51,8 +50,7 @@ exports.login = (req, res, next) => {
 
                 return res.status(200).json({
                     message: 'Logged in.',
-                    token,
-                    user
+                    token
                 })
             } else {
                 return res.status(400).json({
