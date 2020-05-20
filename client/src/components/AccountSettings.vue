@@ -1,6 +1,7 @@
 <template>
   <div>
     <p>this page should be available only for logged in users</p>
+    <p>Your email is: {{ userEmail }}</p>
   </div>
 </template>
 
@@ -9,6 +10,11 @@ import { account as accountService } from '../services/AuthServices'
 
 export default {
   name: 'AccountSettings',
+  computed: {
+    userEmail () {
+      return this.$store.getters.userEmail
+    }
+  },
   beforeCreate () {
     accountService({
       token: this.$store.getters.token

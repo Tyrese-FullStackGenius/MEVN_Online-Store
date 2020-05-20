@@ -11,7 +11,7 @@ export default new Vuex.Store({
       messages: []
     },
     token: localStorage.getItem('token') || '',
-    user: {}
+    userEmail: ''
   },
   mutations: {
     showAlert (state, messages) {
@@ -28,22 +28,28 @@ export default new Vuex.Store({
     },
     authSuccess (state, payload) {
       state.token = payload[0]
-      state.user = payload[1]
+    },
+    setUserEmail (state, payload) {
+      state.userEmail = payload
     },
     logout (state) {
       state.token = ''
-      state.user = {}
+      state.userEmail = ''
     }
   },
   getters: {
     alert: state => state.alert,
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
-    token: state => state.token
+    token: state => state.token,
+    userEmail: state => state.userEmail
   },
   actions: {
     authSuccess ({ commit }, payload) {
       commit('authSuccess', payload)
+    },
+    setUserEmail ({ commit }, payload) {
+      commit('setUserEmail', payload)
     },
     logout ({ commit }) {
       commit('logout')

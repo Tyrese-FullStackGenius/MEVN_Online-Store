@@ -76,9 +76,9 @@ exports.accountSettings = (req, res, next) => {
                 message: 'User not found.'
             });
         }
-        User.findOne({email: user.username}, (err, result) => {
+        User.findOne({email: user.username}, (err, model) => {
             return res.status(200).json({
-                user: result
+                email: model.email
             })
         });
     })

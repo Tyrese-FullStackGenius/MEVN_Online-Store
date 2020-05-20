@@ -13,7 +13,9 @@ const register = params => {
 }
 
 const account = params => {
-  return Api().post('/account/settings', params)
+  return Api().post('/account/settings', params).then(res => {
+    store.dispatch('setUserEmail', res.data.email)
+  })
 }
 
 export { login, register, account }

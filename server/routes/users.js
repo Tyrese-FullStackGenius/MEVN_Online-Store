@@ -22,6 +22,7 @@ router.post('/login', [
         .isLength({min: 8, max: 20})
 ], usersController.login)
 
+// Display current user's credentials
 router.post('/account/settings', [
     check('token').exists()
 ], usersController.accountSettings)
