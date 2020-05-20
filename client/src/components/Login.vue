@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import LoginService from '@/services/LoginService'
+import { login as loginService } from '../services/AuthServices'
 
 export default {
   name: 'Login',
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     async login () {
-      await LoginService.login({
+      await loginService({
         email: this.email,
         password: this.password
       })

@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import SettingsService from '../services/SettingsService'
+import { account as accountService } from '../services/AuthServices'
 
 export default {
   name: 'AccountSettings',
   beforeCreate () {
-    SettingsService.account({
+    accountService({
       token: this.$store.getters.token
     })
   }

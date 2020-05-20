@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import RegisterService from '@/services/RegisterService'
+import { register as registerService } from '../services/AuthServices'
 
 export default {
   name: 'Register',
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     async register () {
-      await RegisterService.register({
+      await registerService({
         email: this.email,
         password: this.password
       })
