@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 
 const jwtMiddleware = expressJwt({
-    secret: 'rysiek123'
+    secret: 'L,T?DpKQXu4%p4To6i4a'
 });
 
 mongoose.connect('mongodb://localhost:27017/store_demo', {useNewUrlParser: true, useUnifiedTopology: true});

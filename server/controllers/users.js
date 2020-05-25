@@ -45,7 +45,7 @@ exports.login = (req, res, next) => {
 
                 let token = jwt.sign(
                     {id: user._id, username: user.email},
-                    'rysiek123',
+                    'L,T?DpKQXu4%p4To6i4a',
                     {expiresIn: 129600});
 
                 return res.status(200).json({
@@ -68,7 +68,7 @@ exports.login = (req, res, next) => {
 exports.accountSettings = (req, res, next) => {
     throwValidationError(req, res);
     console.log(req.body.token);
-    jwt.verify(req.body.token, 'rysiek123', (err, user) => {
+    jwt.verify(req.body.token, 'L,T?DpKQXu4%p4To6i4a', (err, user) => {
         if (err) {
             return res.status(400).json({
                 message: 'User not found.'
