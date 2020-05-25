@@ -7,7 +7,7 @@
             <v-label for="e-mail">
               E-mail
             </v-label>
-            <v-text-field name="e-mail" solo v-model="email"></v-text-field>
+            <v-text-field name="e-mail" outlined dense autofocus v-model="email"></v-text-field>
           </v-col>
         </v-row>
         <v-row>
@@ -15,7 +15,7 @@
             <v-label for="password">
               Password
             </v-label>
-            <v-text-field name="password" type="password" solo v-model="password"></v-text-field>
+            <v-text-field name="password" type="password" outlined dense v-model="password"></v-text-field>
           </v-col>
         </v-row>
         <v-row>
