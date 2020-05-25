@@ -1,21 +1,46 @@
 module.exports = {
     async up(db, client) {
-        // TODO write your migration here.
-        // See https://github.com/seppevs/migrate-mongo/#creating-a-new-migration-script
-        // Example:
-        // await db.collection('albums').updateOne({artist: 'The Beatles'}, {$set: {blacklisted: true}});
+        const getCategoryId = async (name) => {
+            return db.collection('categories').findOne({name: name}).then( category => {
+                return category._id
+            })
+        }
+
         const products = [
             {
                 name: 'game1',
                 price: 30,
                 description: 'desc1',
                 image_url: 'localhost',
-                category: {
-                    data: db.collection('categories').findOne({name: 'Action'}).then( category => {
-                        return category
-                    }),
-                    test: 'test'
-                }
+                category_id: await getCategoryId('Action')
+            },
+            {
+                name: 'game2',
+                price: 10,
+                description: 'desc2',
+                image_url: 'localhost',
+                category_id: await getCategoryId('RPG')
+            },
+            {
+                name: 'game3',
+                price: 15,
+                description: 'desc3',
+                image_url: 'localhost',
+                category_id: await getCategoryId('Puzzle')
+            },
+            {
+                name: 'game4',
+                price: 4,
+                description: 'desc4',
+                image_url: 'localhost',
+                category_id: await getCategoryId('MMO')
+            },
+            {
+                name: 'game5',
+                price: 7,
+                description: 'desc5',
+                image_url: 'localhost',
+                category_id: await getCategoryId('RPG')
             }
         ]
 
@@ -27,9 +52,6 @@ module.exports = {
     },
 
     async down(db, client) {
-        // TODO write the statements to rollback your migration (if possible)
-        // Example:
-        // await db.collection('albums').updateOne({artist: 'The Beatles'}, {$set: {blacklisted: false}});
         await db.collection('products').drop();
     }
 };
