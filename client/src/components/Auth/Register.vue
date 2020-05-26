@@ -1,13 +1,13 @@
 <template>
   <v-form>
     <v-container>
-      <v-form @submit.prevent="login()">
+      <v-form @submit.prevent="register()">
         <v-row>
           <v-col cols="6">
             <v-label for="e-mail">
               E-mail
             </v-label>
-            <v-text-field name="e-mail" outlined dense autofocus v-model="email"></v-text-field>
+            <v-text-field name="e-mail" outlined autofocus dense v-model="email"></v-text-field>
           </v-col>
         </v-row>
         <v-row>
@@ -20,7 +20,7 @@
         </v-row>
         <v-row>
           <v-col cols="12">
-            <v-btn type="submit" color="primary">Login</v-btn>
+            <v-btn type="submit" color="primary">Register</v-btn>
           </v-col>
         </v-row>
       </v-form>
@@ -29,24 +29,25 @@
 </template>
 
 <script>
-import { login as loginService } from '../services/AuthServices'
+import {register as registerService} from '../../services/AuthServices'
 
 export default {
-  name: 'Login',
+  name: 'Register',
   data () {
     return {
       email: null,
-      password: null
+      password: null,
+      confirmPassword: null
     }
   },
   methods: {
-    async login () {
-      await loginService({
+    async register () {
+      await registerService({
         email: this.email,
         password: this.password
       })
       this.$router.push({name: 'Home'})
-      this.$store.commit('showAlert', ['You\'ve been logged in.'])
+      this.$store.commit('showAlert', ['Account has been created.'])
     }
   }
 }

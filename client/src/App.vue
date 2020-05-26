@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import Alert from './components/Alert'
+import Alert from './components/UI/Alert'
 
 export default {
   name: 'App',
