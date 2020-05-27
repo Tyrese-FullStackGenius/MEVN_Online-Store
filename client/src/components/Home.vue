@@ -1,12 +1,14 @@
 <template>
   <div class="hello">
-    <h1>Landing page</h1>
+    <products/>
   </div>
 </template>
 
 <script>
+import Products from './Products'
 export default {
   name: 'Home',
+  components: {Products},
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
