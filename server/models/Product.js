@@ -15,6 +15,7 @@ const ProductSchema = new Schema({
         required: true
     },
     category_id: {
+        type: mongoose.SchemaTypes.ObjectID,
         required: true
     }
 })
