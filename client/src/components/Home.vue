@@ -1,5 +1,6 @@
 <template>
-  <div class="hello">
+  <div>
+    <h1>Main page</h1>
     <products/>
   </div>
 </template>
