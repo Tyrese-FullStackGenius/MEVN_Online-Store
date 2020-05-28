@@ -11,7 +11,8 @@ export default new Vuex.Store({
       messages: []
     },
     token: localStorage.getItem('token') || '',
-    userEmail: ''
+    userEmail: '',
+    showDrawerRight: false
   },
   mutations: {
     showAlert (state, messages) {
@@ -25,6 +26,9 @@ export default new Vuex.Store({
         isVisible: false,
         messages: []
       }
+    },
+    toggleShowDrawerRight (state) {
+      state.showDrawerRight = !state.showDrawerRight
     },
     authSuccess (state, payload) {
       state.token = payload[0]
@@ -42,7 +46,8 @@ export default new Vuex.Store({
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
     token: state => state.token,
-    userEmail: state => state.userEmail
+    userEmail: state => state.userEmail,
+    showDrawerRight: state => state.showDrawerRight
   },
   actions: {
     authSuccess ({ commit }, payload) {
@@ -53,6 +58,9 @@ export default new Vuex.Store({
     },
     logout ({ commit }) {
       commit('logout')
+    },
+    toggleShowDrawerRight ({ commit }) {
+      commit('toggleShowDrawerRight')
     }
   }
 })
