@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app dense elevate-on-scroll dark color="teal darken-1">
     <v-btn text small to="/">
-      Online store
+      Gaming store
     </v-btn>
     <v-spacer></v-spacer>
     <v-btn icon small circle @click.stop="toggleShowDrawerRight" class="float-right">
@@ -9,7 +9,7 @@
     </v-btn>
     <template v-if="isLoggedIn">
       <v-btn text small class="float-right" to="/account/settings">
-        Account
+        My account
       </v-btn>
       <v-btn text small class="float-right" @click="logout">
         Log out
