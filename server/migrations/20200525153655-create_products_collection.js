@@ -32,6 +32,12 @@ module.exports = {
                 category_id: await getCategoryId('Racing')
             },
             {
+                name: 'DiRT: Rally',
+                price: 25.99,
+                image_url: 'https://www.mobygames.com/images/covers/l/382293-dirt-rally-playstation-4-front-cover.png',
+                category_id: await getCategoryId('Racing')
+            },
+            {
                 name: 'Need for Speed',
                 price: 12.50,
                 image_url: 'https://www.mobygames.com/images/covers/l/315555-need-for-speed-playstation-4-front-cover.jpg',
@@ -65,6 +71,12 @@ module.exports = {
                 name: 'Fez',
                 price: 3.99,
                 image_url: 'https://www.mobygames.com/images/covers/l/280974-fez-playstation-3-front-cover.jpg',
+                category_id: await getCategoryId('Indie')
+            },
+            {
+                name: 'Super Meat Boy',
+                price: 8.99,
+                image_url: 'https://www.mobygames.com/images/covers/l/313673-super-meat-boy-playstation-4-front-cover.jpg',
                 category_id: await getCategoryId('Indie')
             }
         ]
