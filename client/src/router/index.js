@@ -38,6 +38,7 @@ let router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  store.commit('hideAlert')
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (store.getters.isLoggedIn) {
       next()

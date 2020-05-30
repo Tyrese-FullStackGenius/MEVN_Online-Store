@@ -1,6 +1,5 @@
 <template>
   <v-app id="app">
-    <Alert/>
     <v-navigation-drawer
       class="orange lighten-2"
       dark
@@ -13,8 +12,11 @@
       </v-list>
     </v-navigation-drawer>
     <navbar></navbar>
-    <v-content class="mx-4 mt-4">
-      <router-view/>
+    <v-content>
+      <Alert/>
+      <div class="mx-4 mt-4">
+        <router-view/>
+      </div>
     </v-content>
   </v-app>
 </template>
