@@ -39,23 +39,23 @@
 </template>
 
 <script>
-  import {get as getProducts} from '../services/ProductServices'
+import {get as getProducts} from '../services/ProductServices'
 
-  export default {
-    name: 'Products',
-    data () {
-      return {
-        products: [],
-        showSkeletonLoaders: true
-      }
-    },
-    beforeCreate () {
-      getProducts().then(products => {
-        this.showSkeletonLoaders = false
-        this.products = products
-      })
+export default {
+  name: 'Products',
+  data () {
+    return {
+      products: [],
+      showSkeletonLoaders: true
     }
+  },
+  beforeCreate () {
+    getProducts().then(products => {
+      this.showSkeletonLoaders = false
+      this.products = products
+    })
   }
+}
 </script>
 
 <style scoped>

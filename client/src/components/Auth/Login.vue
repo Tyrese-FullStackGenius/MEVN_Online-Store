@@ -7,7 +7,7 @@
             <v-label for="e-mail">
               E-mail
             </v-label>
-            <v-text-field name="e-mail" outlined dense autofocus v-model="email"></v-text-field>
+            <v-text-field name="e-mail" outlined dense v-model="email"></v-text-field>
           </v-col>
         </v-row>
         <v-row>
@@ -45,8 +45,9 @@ export default {
         email: this.email,
         password: this.password
       })
-      this.$router.push({name: 'Home'})
-      this.$store.commit('showAlert', ['You\'ve been logged in.'])
+      this.$router.push({name: 'Home'}).then(() => {
+        this.$store.commit('showAlert', ['You\'ve been logged in.'])
+      })
     }
   }
 }

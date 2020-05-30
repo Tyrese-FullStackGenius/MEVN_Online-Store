@@ -40,6 +40,12 @@ export default {
   methods: {
     toggleShowDrawerRight () {
       this.$store.dispatch('toggleShowDrawerRight')
+    },
+    logout () {
+      localStorage.removeItem('token')
+      this.$store.dispatch('logout')
+      this.$router.push({ name: 'Login' })
+      this.$store.commit('showAlert', ['You\'ve been logged out.'])
     }
   }
 }
