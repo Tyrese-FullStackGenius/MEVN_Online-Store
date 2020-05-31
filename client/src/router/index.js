@@ -5,6 +5,7 @@ import Login from '../components/Auth/Login'
 import Register from '../components/Auth/Register'
 import AccountSettings from '../components/Account/AccountSettings'
 import store from '../store/index'
+import Category from '../components/Category'
 
 Vue.use(Router)
 
@@ -33,6 +34,11 @@ let router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/categories/:name',
+      name: 'Category',
+      component: Category
     }
   ]
 })

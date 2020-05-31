@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Homepage</h1>
+    <h1>{{ $route.params.name }} games</h1>
     <products :products="products" :show-skeleton-loaders="showSkeletonLoaders"/>
   </div>
 </template>
@@ -10,17 +10,28 @@ import Products from './Products'
 import {get as getProducts} from '../services/ProductServices'
 
 export default {
-  name: 'Home',
+  name: 'Category',
   components: {Products},
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
       products: [],
       showSkeletonLoaders: true
     }
   },
-  beforeCreate () {
-    getProducts().then(products => {
+  watch: {
+    $route () {
+      getProducts({
+        category: this.$route.params.name
+      }).then(products => {
+        this.showSkeletonLoaders = false
+        this.products = products
+      })
+    }
+  },
+  beforeMount () {
+    getProducts({
+      category: this.$route.params.name
+    }).then(products => {
       this.showSkeletonLoaders = false
       this.products = products
     })
@@ -28,9 +39,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.hello {
-  height: 2000px;
-}
+
 </style>

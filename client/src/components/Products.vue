@@ -33,27 +33,19 @@
         </div>
       </v-row>
     </v-container>
-    <ul>
-    </ul>
   </div>
 </template>
 
 <script>
-import {get as getProducts} from '../services/ProductServices'
-
 export default {
   name: 'Products',
+  props: {
+    products: Array,
+    showSkeletonLoaders: Boolean
+  },
   data () {
     return {
-      products: [],
-      showSkeletonLoaders: true
     }
-  },
-  beforeCreate () {
-    getProducts().then(products => {
-      this.showSkeletonLoaders = false
-      this.products = products
-    })
   }
 }
 </script>

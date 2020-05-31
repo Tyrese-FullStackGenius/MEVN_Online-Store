@@ -1,7 +1,7 @@
 import Api from '@/services/Api'
 
 const get = params => {
-  return Api().get('/products', params).then(res => {
+  return Api().post('/products', params).then(res => {
     return res.data.products
   })
 }

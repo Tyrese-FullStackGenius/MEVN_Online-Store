@@ -13,6 +13,7 @@
         <v-list-item
           v-for="(item, index) in categories"
           :key="index"
+          :to="`/categories/${item.name}`"
         >
           <v-list-item-title>{{ item.name }}</v-list-item-title>
         </v-list-item>
