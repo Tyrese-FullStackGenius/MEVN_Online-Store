@@ -4,7 +4,7 @@ module.exports = {
     // See https://github.com/seppevs/migrate-mongo/#creating-a-new-migration-script
     // Example:
     // await db.collection('albums').updateOne({artist: 'The Beatles'}, {$set: {blacklisted: true}});
-    const categories = ["Action", "RPG", "Racing", "Sports", "Indie", "Puzzle"]
+    const categories = ["action", "rpg", "racing", "sports", "indie", "puzzle"]
 
     await categories.map(category => {
       db.collection('categories').insertOne(
