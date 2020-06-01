@@ -12,8 +12,8 @@
         </div>
       </v-row>
       <v-row v-else>
-        <div v-for="product in products" :key="product.id" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-          <v-card class="d-flex mx-4">
+        <div v-for="product in products" :key="product._id" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+          <v-card class="d-flex mx-4" :to="`/products/${product._id}`">
             <v-container fluid>
               <v-row>
                 <v-col class="col-lg-12 col-xl-6">

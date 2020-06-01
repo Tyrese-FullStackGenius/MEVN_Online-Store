@@ -6,6 +6,7 @@ import Register from '../components/Auth/Register'
 import AccountSettings from '../components/Account/AccountSettings'
 import store from '../store/index'
 import Category from '../components/Category'
+import Product from "../components/Product";
 
 Vue.use(Router)
 
@@ -39,6 +40,11 @@ let router = new Router({
       path: '/categories/:name',
       name: 'Category',
       component: Category
+    },
+    {
+      path: '/products/:id',
+      name: 'Product',
+      component: Product
     }
   ]
 })
