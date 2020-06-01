@@ -1,19 +1,19 @@
 <template>
   <v-app id="app">
-    <v-navigation-drawer
-      class="orange lighten-2"
-      dark
-      v-model="showDrawerRight"
-      app
-      clipped
-      right
-    >
-      <v-list dense>
-      </v-list>
-    </v-navigation-drawer>
     <navbar></navbar>
     <v-content>
       <Alert/>
+      <v-navigation-drawer
+        class="grey lighten-4 float-right"
+        dark
+        v-model="showDrawerRight"
+        disable-resize-watcher
+        clipped
+        right
+      >
+        <v-list dense>
+        </v-list>
+      </v-navigation-drawer>
       <div class="mx-4 mt-4">
         <router-view/>
       </div>
