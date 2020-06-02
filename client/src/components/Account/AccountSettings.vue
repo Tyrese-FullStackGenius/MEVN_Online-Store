@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { account as accountService } from '../../services/AuthServices'
+import { account as accountService } from '../../services/UserServices'
 
 export default {
   name: 'AccountSettings',

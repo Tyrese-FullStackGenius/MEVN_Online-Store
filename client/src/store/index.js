@@ -12,7 +12,8 @@ export default new Vuex.Store({
     },
     token: localStorage.getItem('token') || '',
     userEmail: '',
-    showDrawerRight: false
+    showDrawerRight: false,
+    cart: []
   },
   mutations: {
     showAlert (state, messages) {
@@ -39,6 +40,9 @@ export default new Vuex.Store({
     logout (state) {
       state.token = ''
       state.userEmail = ''
+    },
+    setCart (state, payload) {
+      state.cart = payload
     }
   },
   getters: {
@@ -47,7 +51,8 @@ export default new Vuex.Store({
     authStatus: state => state.status,
     token: state => state.token,
     userEmail: state => state.userEmail,
-    showDrawerRight: state => state.showDrawerRight
+    showDrawerRight: state => state.showDrawerRight,
+    cart: state => state.cart
   },
   actions: {
     authSuccess ({ commit }, payload) {
@@ -61,6 +66,9 @@ export default new Vuex.Store({
     },
     toggleShowDrawerRight ({ commit }) {
       commit('toggleShowDrawerRight')
+    },
+    setCart ({ commit }, payload) {
+      commit('setCart', payload)
     }
   }
 })

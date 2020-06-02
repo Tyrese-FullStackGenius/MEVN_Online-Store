@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import {register as registerService} from '../../services/AuthServices'
+import {register as registerService} from '../../services/UserServices'
 
 export default {
   name: 'Register',

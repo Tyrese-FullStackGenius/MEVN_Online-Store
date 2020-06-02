@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { login as loginService } from '../../services/AuthServices'
+import { login as loginService } from '../../services/UserServices'
 
 export default {
   name: 'Login',

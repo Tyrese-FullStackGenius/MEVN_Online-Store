@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-btn to="/">Go back</v-btn>
+    <v-btn @click="addItemToCart">Add to cart</v-btn>
     <h1>{{ product.name }}</h1>
     <v-container fluid>
       <v-row>
@@ -17,24 +18,32 @@
 </template>
 
 <script>
-import {get as getProducts} from '../services/ProductServices'
+  import {get as getProducts} from '../services/ProductServices'
+  import {addToCart} from '../services/UserServices'
 
-export default {
-  name: "Product",
-  data() {
-    return {
-      product: {}
+  export default {
+    name: "Product",
+    data() {
+      return {
+        product: {}
+      }
+    },
+    methods: {
+      addItemToCart() {
+        addToCart({
+          token: this.$store.getters.token,
+          product: this.product
+        })
+      }
+    },
+    beforeMount() {
+      getProducts({
+        id: this.$route.params.id
+      }).then(data => {
+        this.product = data.product
+      })
     }
-  },
-  beforeMount() {
-    getProducts({
-      id: this.$route.params.id
-    }).then(data => {
-      this.product = data.product
-      console.log(this.product);
-    })
   }
-}
 </script>
 
 <style scoped>

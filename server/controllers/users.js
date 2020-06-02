@@ -2,6 +2,7 @@ const {validationResult} = require('express-validator')
 const bcrypt = require("bcryptjs");
 const User = require('../models/User');
 const jwt = require('jsonwebtoken')
+const jwt_decode = require('jwt-decode')
 
 exports.register = (req, res, next) => {
     throwValidationError(req, res);
@@ -81,6 +82,33 @@ exports.accountSettings = (req, res, next) => {
         });
     })
 
+}
+
+exports.updateCart = (req, res, next) => {
+    throwValidationError(req, res);
+
+    const jwt_decoded = jwt_decode(req.body.token)
+
+    User.findOne({email: jwt_decoded.username}, (err, model) => {
+        model.cart.push(req.body.product)
+        model.save()
+
+        return res.status(200).json({
+            cart: model.cart
+        })
+    })
+}
+
+exports.getCart = (req, res, next) => {
+    throwValidationError(req, res);
+
+    const jwt_decoded = jwt_decode(req.body.token)
+
+    User.findOne({email: jwt_decoded.username}, (err, model) => {
+        return res.status(200).json({
+            cart: model.cart
+        })
+    })
 }
 
 const throwValidationError = (req, res) => {

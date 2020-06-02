@@ -27,4 +27,14 @@ router.post('/account/settings', [
     check('token').exists()
 ], usersController.accountSettings)
 
+// Get cart
+router.post('/cart/get', [
+    check('token').exists()
+], usersController.getCart)
+
+// Update cart
+router.post('/cart/add', [
+    check('token').exists()
+], usersController.updateCart)
+
 module.exports = router;

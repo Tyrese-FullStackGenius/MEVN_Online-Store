@@ -18,4 +18,16 @@ const account = params => {
   })
 }
 
-export { login, register, account }
+const addToCart = params => {
+  return Api().post('/cart/add', params).then(res => {
+    store.dispatch('setCart', res.data.cart)
+  })
+}
+
+const getCart = params => {
+  return Api().post('/cart/get', params).then(res => {
+    store.dispatch('setCart', res.data.cart)
+  })
+}
+
+export { login, register, account, addToCart, getCart }
