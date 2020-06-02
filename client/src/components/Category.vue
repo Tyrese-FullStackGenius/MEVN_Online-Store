@@ -22,9 +22,9 @@ export default {
     $route () {
       getProducts({
         category: this.$route.params.name
-      }).then(products => {
+      }).then(data => {
         this.showSkeletonLoaders = false
-        this.products = products
+        this.products = data.products
       })
     }
   },
