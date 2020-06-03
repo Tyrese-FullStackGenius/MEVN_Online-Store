@@ -40,13 +40,14 @@ export default {
     }
   },
   methods: {
-    async login () {
-      await loginService({
+    login () {
+      loginService({
         email: this.email,
         password: this.password
-      })
-      this.$router.push({name: 'Home'}).then(() => {
-        this.$store.commit('showAlert', ['You\'ve been logged in.'])
+      }).then(res => {
+        this.$router.push({name: 'Home'}).then(() => {
+          this.$store.commit('showAlert', ['You\'ve been logged in.'])
+        })
       })
     }
   }

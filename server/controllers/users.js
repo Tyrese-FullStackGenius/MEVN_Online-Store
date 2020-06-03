@@ -51,7 +51,8 @@ exports.login = (req, res, next) => {
 
                 return res.status(200).json({
                     message: 'Logged in.',
-                    token
+                    token,
+                    cart: user.cart
                 })
             } else {
                 return res.status(400).json({
