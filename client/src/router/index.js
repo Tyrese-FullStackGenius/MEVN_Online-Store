@@ -6,7 +6,7 @@ import Register from '../components/Auth/Register'
 import AccountSettings from '../components/Account/AccountSettings'
 import store from '../store/index'
 import Category from '../components/Category'
-import Product from "../components/Product";
+import Product from '../components/Product'
 
 Vue.use(Router)
 

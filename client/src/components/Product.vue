@@ -18,32 +18,32 @@
 </template>
 
 <script>
-  import {get as getProducts} from '../services/ProductServices'
-  import {addToCart} from '../services/UserServices'
+import {get as getProducts} from '../services/ProductServices'
+import {addToCart} from '../services/UserServices'
 
-  export default {
-    name: "Product",
-    data() {
-      return {
-        product: {}
-      }
-    },
-    methods: {
-      addItemToCart() {
-        addToCart({
-          token: this.$store.getters.token,
-          product: this.product
-        })
-      }
-    },
-    beforeMount() {
-      getProducts({
-        id: this.$route.params.id
-      }).then(data => {
-        this.product = data.product
+export default {
+  name: 'Product',
+  data () {
+    return {
+      product: {}
+    }
+  },
+  methods: {
+    addItemToCart () {
+      addToCart({
+        token: this.$store.getters.token,
+        product: this.product
       })
     }
+  },
+  beforeMount () {
+    getProducts({
+      id: this.$route.params.id
+    }).then(data => {
+      this.product = data.product
+    })
   }
+}
 </script>
 
 <style scoped>

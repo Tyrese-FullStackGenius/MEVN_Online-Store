@@ -11,7 +11,7 @@
         right
       >
         <v-list dense>
-          <v-list-item v-for="product in cart" :id="product._id">
+          <v-list-item v-for="(product, index) in cart" :key="product._id + index">
             {{ product.name}} - {{ product.price }}
           </v-list-item>
         </v-list>
@@ -44,9 +44,9 @@ export default {
       return this.$store.getters.showDrawerRight
     }
   },
-  beforeCreate() {
+  beforeCreate () {
     getCart({
-      token: this.$store.getters.token,
+      token: this.$store.getters.token
     })
   }
 }

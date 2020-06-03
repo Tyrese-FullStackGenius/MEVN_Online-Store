@@ -40,6 +40,7 @@ export default new Vuex.Store({
     logout (state) {
       state.token = ''
       state.userEmail = ''
+      state.cart = []
     },
     setCart (state, payload) {
       state.cart = payload
