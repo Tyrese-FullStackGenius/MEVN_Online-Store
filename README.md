@@ -1,6 +1,6 @@
 <img src="cover.png" alt="drawing" height="400"/>
 
-# Setup guide
+# Install guide
 A list of instructions on how to run this project on your local machine.
 ## Server
 Go into server folder.
