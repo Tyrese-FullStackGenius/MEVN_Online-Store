@@ -69,7 +69,6 @@ exports.login = (req, res, next) => {
 
 exports.accountSettings = (req, res, next) => {
     throwValidationError(req, res);
-    console.log(req.body.token);
     jwt.verify(req.body.token, 'L,T?DpKQXu4%p4To6i4a', (err, user) => {
         if (err) {
             return res.status(400).json({
