@@ -30,6 +30,7 @@
 
 <script>
 import { login as loginService } from '../../services/UserServices'
+import store from '../../store'
 
 export default {
   name: 'Login',
@@ -45,6 +46,9 @@ export default {
         email: this.email,
         password: this.password
       }).then(res => {
+        localStorage.setItem('token', res.data.token)
+        store.dispatch('authSuccess', [res.data.token, res.data.user])
+        store.dispatch('setCart', res.data.cart)
         this.$router.push({name: 'Home'}).then(() => {
           this.$store.commit('showAlert', ['You\'ve been logged in.'])
         })

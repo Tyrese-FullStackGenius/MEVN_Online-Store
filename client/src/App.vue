@@ -47,6 +47,8 @@ export default {
   beforeCreate () {
     getCart({
       token: this.$store.getters.token
+    }).then(res => {
+      this.$store.dispatch('setCart', res.data.cart)
     })
   }
 }

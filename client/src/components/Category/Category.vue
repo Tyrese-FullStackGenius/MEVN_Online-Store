@@ -22,18 +22,18 @@ export default {
     $route () {
       getProducts({
         category: this.$route.params.name
-      }).then(data => {
+      }).then(res => {
         this.showSkeletonLoaders = false
-        this.products = data.products
+        this.products = res.data.products
       })
     }
   },
   beforeMount () {
     getProducts({
       category: this.$route.params.name
-    }).then(data => {
+    }).then(res => {
       this.showSkeletonLoaders = false
-      this.products = data.products
+      this.products = res.data.products
     })
   }
 }

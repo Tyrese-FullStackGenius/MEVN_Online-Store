@@ -33,14 +33,16 @@ export default {
       addToCart({
         token: this.$store.getters.token,
         product: this.product
+      }).then(res => {
+        this.$store.dispatch('setCart', res.data.cart)
       })
     }
   },
   beforeMount () {
     getProducts({
       id: this.$route.params.id
-    }).then(data => {
-      this.product = data.product
+    }).then(res => {
+      this.product = res.data.product
     })
   }
 }

@@ -18,6 +18,8 @@ export default {
   beforeCreate () {
     accountService({
       token: this.$store.getters.token
+    }).then(res => {
+      this.$store.dispatch('setUserEmail', res.data.email)
     })
   }
 }

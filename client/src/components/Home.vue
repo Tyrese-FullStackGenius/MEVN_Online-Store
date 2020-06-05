@@ -20,9 +20,9 @@ export default {
     }
   },
   beforeCreate () {
-    getProducts().then(data => {
+    getProducts().then(res => {
       this.showSkeletonLoaders = false
-      this.products = data.products
+      this.products = res.data.products
     })
   }
 }
