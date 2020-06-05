@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import {get as getProducts} from '../services/ProductServices'
-import {addToCart} from '../services/UserServices'
+import {get as getProducts} from '../../services/ProductServices'
+import {addToCart} from '../../services/UserServices'
 
 export default {
   name: 'Product',

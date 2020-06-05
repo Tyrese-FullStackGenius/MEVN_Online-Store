@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Products from './Products'
+import Products from './Product/Products'
 import {get as getProducts} from '../services/ProductServices'
 
 export default {

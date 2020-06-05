@@ -41,13 +41,14 @@ export default {
     }
   },
   methods: {
-    async register () {
-      await registerService({
+    register () {
+      registerService({
         email: this.email,
         password: this.password
-      })
-      this.$router.push({name: 'Login'}).then(() => {
-        this.$store.commit('showAlert', ['Account has been created, now please log in.'])
+      }).then(res => {
+        this.$router.push({name: 'Login'}).then(() => {
+          this.$store.commit('showAlert', ['Account has been created, now please log in.'])
+        })
       })
     }
   }
