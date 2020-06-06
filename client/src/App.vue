@@ -3,19 +3,7 @@
     <navbar></navbar>
     <v-content>
       <Alert/>
-      <v-navigation-drawer
-        class="grey lighten-4 float-right"
-        v-model="showDrawerRight"
-        disable-resize-watcher
-        clipped
-        right
-      >
-        <v-list dense>
-          <v-list-item v-for="(product, index) in cart" :key="product._id + index">
-            {{ product.name}} - {{ product.price }}
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
+      <NavigationDrawer/>
       <div class="mx-4 mt-4">
         <router-view/>
       </div>
@@ -27,30 +15,16 @@
 import Alert from './components/UI/Alert'
 import Navbar from './components/UI/Navbar'
 import {get as getCart} from './services/CartServices'
+import NavigationDrawer from './components/UI/NavigationDrawer'
 
 export default {
   name: 'App',
-  components: {Navbar, Alert},
+  components: {NavigationDrawer, Navbar, Alert},
   props: {
     source: String
   },
   methods: {
   },
-  computed: {
-    cart () {
-      return this.$store.getters.cart
-    },
-    showDrawerRight () {
-      return this.$store.getters.showDrawerRight
-    }
-  },
-  beforeCreate () {
-    getCart({
-      token: this.$store.getters.token
-    }).then(res => {
-      this.$store.dispatch('setCart', res.data.cart)
-    })
-  }
 }
 </script>
 <style>
