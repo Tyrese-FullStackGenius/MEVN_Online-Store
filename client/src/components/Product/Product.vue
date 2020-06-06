@@ -19,7 +19,7 @@
 
 <script>
 import {get as getProducts} from '../../services/ProductServices'
-import {addToCart} from '../../services/UserServices'
+import {add as addToCart} from '../../services/CartServices'
 
 export default {
   name: 'Product',

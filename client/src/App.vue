@@ -26,7 +26,7 @@
 <script>
 import Alert from './components/UI/Alert'
 import Navbar from './components/UI/Navbar'
-import {getCart} from './services/UserServices'
+import {get as getCart} from './services/CartServices'
 
 export default {
   name: 'App',

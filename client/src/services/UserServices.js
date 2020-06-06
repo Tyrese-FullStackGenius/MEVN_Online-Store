@@ -12,12 +12,4 @@ const account = params => {
   return Api().post('/account/settings', params)
 }
 
-const addToCart = params => {
-  return Api().post('/cart/add', params)
-}
-
-const getCart = params => {
-  return Api().post('/cart/get', params)
-}
-
-export { login, register, account, addToCart, getCart }
+export { login, register, account }
