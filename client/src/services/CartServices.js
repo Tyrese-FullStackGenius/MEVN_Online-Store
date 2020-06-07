@@ -1,11 +1,17 @@
-import Api from '@/services/Api'
+import { api, authorization } from './Api'
 
 const add = params => {
-  return Api().post('/cart/add', params)
+  return api.post('/cart/add', {
+    headers: authorization,
+    data: params
+  })
 }
 
 const get = params => {
-  return Api().post('/cart/get', params)
+  return api.get('/cart', {
+    headers: authorization,
+    data: params
+  })
 }
 
 export { add, get }

@@ -5,6 +5,10 @@ const api = axios.create({
   baseURL: `http://localhost:8081`
 })
 
+const authorization = {
+  Authorization: 'Bearer ' + store.getters.token
+}
+
 api.interceptors.response.use(response => {
   store.commit('hideAlert')
   return response
@@ -22,6 +26,4 @@ api.interceptors.response.use(response => {
   return Promise.reject(res)
 })
 
-export default () => {
-  return api
-}
+export {api, authorization}
