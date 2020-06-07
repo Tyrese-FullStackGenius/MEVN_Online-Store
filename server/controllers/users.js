@@ -84,39 +84,3 @@ exports.accountSettings = (req, res, next) => {
 
 }
 
-exports.updateCart = (req, res, next) => {
-    throwValidationError(req, res);
-
-    const jwt_decoded = jwt_decode(req.body.token)
-
-    User.findOne({email: jwt_decoded.username}, (err, model) => {
-        model.cart.push(req.body.product)
-        model.save()
-
-        return res.status(200).json({
-            cart: model.cart
-        })
-    })
-}
-
-exports.getCart = (req, res, next) => {
-    throwValidationError(req, res);
-
-    const jwt_decoded = jwt_decode(req.body.token)
-
-    User.findOne({email: jwt_decoded.username}, (err, model) => {
-        return res.status(200).json({
-            cart: model.cart
-        })
-    })
-}
-
-const throwValidationError = (req, res) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-        return res.status(422).json({
-            errors: errors.array()
-        });
-    }
-}

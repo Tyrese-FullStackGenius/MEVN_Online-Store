@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const usersRoutes = require('../routes/users')
 const productsRoutes = require('../routes/products')
 const categoriesRoutes = require('../routes/categories')
+const cartsRoutes = require('../routes/cart')
 
 const app = express()
 
@@ -27,6 +28,6 @@ const jwtMiddleware = expressJwt({
 
 mongoose.connect('mongodb://localhost:27017/store_demo', {useNewUrlParser: true, useUnifiedTopology: true});
 
-app.use(usersRoutes, productsRoutes, categoriesRoutes);
+app.use(usersRoutes, productsRoutes, categoriesRoutes, cartsRoutes);
 
 app.listen(process.env.PORT || 8081)
