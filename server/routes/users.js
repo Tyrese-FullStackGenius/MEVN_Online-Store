@@ -23,8 +23,6 @@ router.post('/login', [
 ], usersController.login)
 
 // Display current user's credentials
-router.post('/account/settings', [
-    check('token').exists()
-], usersController.accountSettings)
+router.post('/account/settings', usersController.accountSettings)
 
 module.exports = router;

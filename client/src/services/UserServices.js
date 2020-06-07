@@ -1,22 +1,15 @@
-import { api, authorization } from './Api'
+import { api } from './Api'
 
 const login = params => {
-  return api.post('/login', {
-    data: params
-  })
+  return api.post('/login', params)
 }
 
 const register = params => {
-  return api.post('/register', {
-    data: params
-  })
+  return api.post('/register', params)
 }
 
 const account = params => {
-  return api.post('/account/settings', {
-    headers: authorization,
-    data: params
-  })
+  return api.post('/account/settings', params)
 }
 
 export { login, register, account }

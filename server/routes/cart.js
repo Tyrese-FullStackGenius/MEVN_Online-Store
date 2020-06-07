@@ -4,9 +4,7 @@ const {check} = require('express-validator')
 const cartsController = require('../controllers/carts');
 
 // Get cart
-router.post('/cart/get', [
-    check('token').exists()
-], cartsController.get)
+router.get('/cart', cartsController.get)
 
 // Update cart
 router.post('/cart/add', [

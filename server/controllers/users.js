@@ -2,7 +2,6 @@ const {validationResult} = require('express-validator')
 const bcrypt = require("bcryptjs");
 const User = require('../models/User');
 const jwt = require('jsonwebtoken')
-const jwt_decode = require('jwt-decode')
 
 exports.register = (req, res, next) => {
     throwValidationError(req, res);
@@ -34,7 +33,6 @@ exports.register = (req, res, next) => {
 
 exports.login = (req, res, next) => {
     throwValidationError(req, res);
-
     User.findOne({email: req.body.email}).then(user => {
         if (!user) {
             return res.status(400).json({
@@ -69,7 +67,7 @@ exports.login = (req, res, next) => {
 
 exports.accountSettings = (req, res, next) => {
     throwValidationError(req, res);
-    jwt.verify(req.body.token, 'L,T?DpKQXu4%p4To6i4a', (err, user) => {
+    jwt.verify(req.body.headers.Authorization.substring(7), 'L,T?DpKQXu4%p4To6i4a', (err, user) => {
         if (err) {
             return res.status(400).json({
                 message: 'User not found.'
@@ -84,3 +82,12 @@ exports.accountSettings = (req, res, next) => {
 
 }
 
+const throwValidationError = (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).json({
+            errors: errors.array()
+        });
+    }
+}

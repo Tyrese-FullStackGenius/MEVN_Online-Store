@@ -14,7 +14,6 @@
 <script>
 import Alert from './components/UI/Alert'
 import Navbar from './components/UI/Navbar'
-import {get as getCart} from './services/CartServices'
 import NavigationDrawer from './components/UI/NavigationDrawer'
 
 export default {
@@ -24,7 +23,7 @@ export default {
     source: String
   },
   methods: {
-  },
+  }
 }
 </script>
 <style>

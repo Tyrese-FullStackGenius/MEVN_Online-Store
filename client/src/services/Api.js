@@ -1,13 +1,11 @@
 import axios from 'axios'
 import store from '../store/index'
 
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + store.getters.token
+
 const api = axios.create({
   baseURL: `http://localhost:8081`
 })
-
-const authorization = {
-  Authorization: 'Bearer ' + store.getters.token
-}
 
 api.interceptors.response.use(response => {
   store.commit('hideAlert')
@@ -26,4 +24,4 @@ api.interceptors.response.use(response => {
   return Promise.reject(res)
 })
 
-export {api, authorization}
+export {api}
