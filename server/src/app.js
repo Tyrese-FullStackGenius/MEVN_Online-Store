@@ -30,4 +30,4 @@ mongoose.connect('mongodb://localhost:27017/store_demo', {useNewUrlParser: true,
 
 app.use(usersRoutes, productsRoutes, categoriesRoutes, cartsRoutes);
 
-app.listen(process.env.PORT || 8081)
+app.listen(8081)

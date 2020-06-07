@@ -1,10 +1,10 @@
-const {validationResult} = require('express-validator')
 const bcrypt = require("bcryptjs");
 const User = require('../models/User');
 const jwt = require('jsonwebtoken')
+const validator = require('../src/validator')
 
 exports.register = (req, res, next) => {
-    throwValidationError(req, res);
+    validator.throwValidationError(req, res);
 
     User.findOne({email: req.body.email}).then(user => {
         if (user) {
@@ -32,7 +32,8 @@ exports.register = (req, res, next) => {
 }
 
 exports.login = (req, res, next) => {
-    throwValidationError(req, res);
+    validator.throwValidationError(req, res);
+
     User.findOne({email: req.body.email}).then(user => {
         if (!user) {
             return res.status(400).json({
@@ -66,7 +67,8 @@ exports.login = (req, res, next) => {
 }
 
 exports.accountSettings = (req, res, next) => {
-    throwValidationError(req, res);
+    validator.throwValidationError(req, res);
+
     jwt.verify(req.body.headers.Authorization.substring(7), 'L,T?DpKQXu4%p4To6i4a', (err, user) => {
         if (err) {
             return res.status(400).json({
@@ -80,14 +82,4 @@ exports.accountSettings = (req, res, next) => {
         });
     })
 
-}
-
-const throwValidationError = (req, res) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-        return res.status(422).json({
-            errors: errors.array()
-        });
-    }
 }
