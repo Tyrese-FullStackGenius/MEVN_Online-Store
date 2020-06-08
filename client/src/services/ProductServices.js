@@ -1,7 +1,9 @@
-import { api } from './Api'
+import {api} from './Api'
 
 const get = params => {
-  return api.post('/products', params)
+  return api.get('/products', {
+    params: params
+  })
 }
 
-export { get }
+export {get}

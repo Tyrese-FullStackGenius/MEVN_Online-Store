@@ -23,6 +23,6 @@ router.post('/login', [
 ], usersController.login)
 
 // Display current user's credentials
-router.post('/account/settings', usersController.accountSettings)
+router.get('/account/settings', usersController.accountSettings)
 
 module.exports = router;

@@ -1,7 +1,9 @@
 import { api } from './Api'
 
 const get = params => {
-  return api.post('/categories', params)
+  return api.get('/categories', {
+    params: params
+  })
 }
 
 export { get }

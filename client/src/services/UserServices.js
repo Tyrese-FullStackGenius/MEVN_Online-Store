@@ -9,7 +9,9 @@ const register = params => {
 }
 
 const account = params => {
-  return api.post('/account/settings', params)
+  return api.get('/account/settings', {
+    params: params
+  })
 }
 
 export { login, register, account }

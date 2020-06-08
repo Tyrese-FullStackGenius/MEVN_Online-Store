@@ -5,8 +5,8 @@ const validator = require('../src/validator')
 exports.get = (req, res, next) => {
     validator.throwValidationError(req, res)
 
-    if (req.body.category) {
-        return Category.findOne({name: req.body.category}).then(category => {
+    if (req.query.category) {
+        return Category.findOne({name: req.query.category}).then(category => {
             Product.find({category_id: category._id}).then(products => {
                 res.status(200).json({
                     products: products,
@@ -16,8 +16,8 @@ exports.get = (req, res, next) => {
         })
     }
 
-    if (req.body.id) {
-        return Product.findOne({_id: req.body.id}).then(product => {
+    if (req.query.id) {
+        return Product.findOne({_id: req.query.id}).then(product => {
             res.status(200).json({
                 product: product,
             })

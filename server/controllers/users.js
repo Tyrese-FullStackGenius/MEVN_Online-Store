@@ -69,7 +69,7 @@ exports.login = (req, res, next) => {
 exports.accountSettings = (req, res, next) => {
     validator.throwValidationError(req, res);
 
-    jwt.verify(req.body.headers.Authorization.substring(7), 'L,T?DpKQXu4%p4To6i4a', (err, user) => {
+    jwt.verify(req.headers.authorization.substring(7), 'L,T?DpKQXu4%p4To6i4a', (err, user) => {
         if (err) {
             return res.status(400).json({
                 message: 'User not found.'
