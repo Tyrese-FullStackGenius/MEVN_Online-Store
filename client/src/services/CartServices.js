@@ -8,4 +8,10 @@ const get = params => {
   return api.get('/cart', params)
 }
 
-export { add, get }
+const destroy = params => {
+  return api.delete('/cart/delete', {
+    params: params
+  })
+}
+
+export { add, get, destroy }

@@ -8,14 +8,14 @@
   >
     <v-list dense>
       <v-list-item v-for="(product, index) in cart" :key="product._id + index">
-        {{ product.name}} - {{ product.price }}
+        {{ product.name}} - {{ product.price }} <v-btn text class="red--text" @click="destroy(product._id)">-</v-btn>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script>
-import {get as getCart} from '../../services/CartServices'
+import {get as getCart, destroy as destroyCartItem} from '../../services/CartServices'
 
 export default {
   name: 'NavigationDrawer',
@@ -25,6 +25,15 @@ export default {
     },
     showDrawerRight () {
       return this.$store.getters.showDrawerRight
+    }
+  },
+  methods: {
+    destroy (id) {
+      destroyCartItem({
+        id: id
+      }).then(res => {
+        this.$store.dispatch('setCart', res.data.cart)
+      })
     }
   },
   beforeCreate () {
