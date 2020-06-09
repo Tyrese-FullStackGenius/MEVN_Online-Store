@@ -11,4 +11,7 @@ router.post('/cart/add', [
     check('token').exists()
 ], cartsController.update)
 
+// Delete item from cart
+router.delete('/cart/delete', cartsController.destroy)
+
 module.exports = router;

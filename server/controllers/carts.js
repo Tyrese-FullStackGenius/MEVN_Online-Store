@@ -29,3 +29,20 @@ exports.get = (req, res, next) => {
         })
     })
 }
+
+exports.destroy = (req, res, next) => {
+    validator.throwValidationError(req, res);
+
+    jwt.verify(req.headers.authorization.substring(7), 'L,T?DpKQXu4%p4To6i4a', (err, user) => {
+        User.findOne({email: user.username}, (err, model) => {
+            const itemToBeRemoved = model.cart.find(item => item._id === req.query.id)
+            console.log(model.cart.indexOf(itemToBeRemoved));
+            model.cart.splice(model.cart.indexOf(itemToBeRemoved), 1)
+            model.save()
+
+            return res.status(200).json({
+                cart: model.cart
+            })
+        })
+    })
+}
