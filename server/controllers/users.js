@@ -31,6 +31,21 @@ exports.register = (req, res, next) => {
     })
 }
 
+
+exports.verifyToken = (req, res, next) => {
+    const token = req.headers.authorization;
+    jwt.verify(token, 'L,T?DpKQXu4%p4To6i4a', (err, decoded) => {
+        if (err) {
+            console.log(err);
+            return res.status(401).send();
+        }
+
+        return res.status(200).json({
+            'message': 'Token is still valid'
+        })
+    })
+}
+
 exports.login = (req, res, next) => {
     validator.throwValidationError(req, res);
 
@@ -46,7 +61,7 @@ exports.login = (req, res, next) => {
                 let token = jwt.sign(
                     {id: user._id, username: user.email},
                     'L,T?DpKQXu4%p4To6i4a',
-                    {expiresIn: 129600});
+                    {expiresIn: 2});
 
                 return res.status(200).json({
                     message: 'Logged in.',
