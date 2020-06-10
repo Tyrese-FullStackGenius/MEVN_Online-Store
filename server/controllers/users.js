@@ -36,7 +36,6 @@ exports.verifyToken = (req, res, next) => {
     const token = req.headers.authorization;
     jwt.verify(token, 'L,T?DpKQXu4%p4To6i4a', (err, decoded) => {
         if (err) {
-            console.log(err);
             return res.status(401).send();
         }
 
