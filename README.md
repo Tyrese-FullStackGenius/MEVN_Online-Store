@@ -7,4 +7,4 @@ Go into server folder.
 Run `migrate-mongo up`to populate the database with products and categories (your MongoDB should be running on localhost:27017) and `npm start` to fire up a server
 
 ## Client
-Go into client folder and run `npm run dev`
+Move into client folder and run `npm run dev`
