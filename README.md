@@ -1,4 +1,4 @@
-<img src="cover.png" alt="drawing" height="400"/>
+<img src="cover.png" alt="drawing" min-width="400"/>
 
 # Install guide
 A list of instructions on how to run this project on your local machine.
