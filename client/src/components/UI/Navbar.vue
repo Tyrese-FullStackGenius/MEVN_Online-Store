@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app dense elevate-on-scroll dark color="teal darken-1">
+  <v-app-bar app dense elevate-on-scroll dark color="teal darken-2">
     <v-btn text to="/">
       Gaming store
     </v-btn>
