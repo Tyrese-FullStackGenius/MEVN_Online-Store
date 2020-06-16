@@ -18,6 +18,12 @@ export default {
   beforeCreate () {
     accountService().then(res => {
       this.$store.dispatch('setUserEmail', res.data.email)
+    }).catch(err => {
+      this.$store.dispatch('logout')
+      localStorage.removeItem('token')
+      this.$router.push({name: 'Login'}).then(res => {
+        this.$store.commit('showAlert', ['You\'ve been logged out.'])
+      })
     })
   }
 }
