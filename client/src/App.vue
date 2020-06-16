@@ -15,6 +15,7 @@
 import Alert from './components/UI/Alert'
 import Navbar from './components/UI/Navbar'
 import NavigationDrawer from './components/UI/NavigationDrawer'
+import { verifyToken } from './services/UserServices'
 
 export default {
   name: 'App',
@@ -23,6 +24,10 @@ export default {
     source: String
   },
   methods: {
+  },
+  beforeCreate () {
+    verifyToken().then(res => {
+    })
   }
 }
 </script>
