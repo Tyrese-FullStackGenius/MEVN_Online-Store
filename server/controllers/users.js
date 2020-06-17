@@ -60,7 +60,7 @@ exports.login = (req, res, next) => {
                 let token = jwt.sign(
                     {id: user._id, username: user.email},
                     'L,T?DpKQXu4%p4To6i4a',
-                    {expiresIn: 2});
+                    {expiresIn: 129600});
 
                 return res.status(200).json({
                     message: 'Logged in.',

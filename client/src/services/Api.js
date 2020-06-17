@@ -1,10 +1,13 @@
 import axios from 'axios'
 import store from '../store/index'
 
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + store.getters.token
-
 const api = axios.create({
   baseURL: `http://localhost:8081`
+})
+
+api.interceptors.request.use(request => {
+  api.defaults.headers.common['Authorization'] = 'Bearer ' + store.getters.token
+  return request
 })
 
 api.interceptors.response.use(response => {
