@@ -25,7 +25,7 @@ export default {
   },
   methods: {
   },
-  beforeCreate () {
+  mounted () {
     verifyToken().then(res => {
     })
   }

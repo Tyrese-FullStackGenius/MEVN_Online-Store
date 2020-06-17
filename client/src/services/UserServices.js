@@ -15,7 +15,7 @@ const account = params => {
 }
 
 const verifyToken = params => {
-  return api.post('/account/token/verify')
+  return api.post('/account/token/verify', params)
 }
 
 export { login, register, account, verifyToken }

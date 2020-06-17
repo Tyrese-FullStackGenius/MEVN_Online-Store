@@ -7,9 +7,10 @@ const api = axios.create({
 
 api.interceptors.request.use(request => {
   api.defaults.headers.common['Authorization'] = 'Bearer ' + store.getters.token
+  console.log(request)
   return request
 })
-
+// TODO: Authorization token is not being set for requests that are made when page is initially loading
 api.interceptors.response.use(response => {
   store.commit('hideAlert')
   return response
