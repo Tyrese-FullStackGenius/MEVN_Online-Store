@@ -1,16 +1,29 @@
 <template>
-  <div class="hello">
-    <h1>Landing page</h1>
+  <div>
+    <h1>Homepage</h1>
+    <products :products="products" :show-skeleton-loaders="showSkeletonLoaders"/>
   </div>
 </template>
 
 <script>
+import Products from './Product/Products'
+import {get as getProducts} from '../services/ProductServices'
+
 export default {
   name: 'Home',
+  components: {Products},
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      products: [],
+      showSkeletonLoaders: true
     }
+  },
+  beforeCreate () {
+    getProducts().then(res => {
+      this.showSkeletonLoaders = false
+      this.products = res.data.products
+    })
   }
 }
 </script>

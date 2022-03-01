@@ -1,72 +1,33 @@
 const express = require('express')
-const {check, validationResult} = require('express-validator/check')
-const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
-const Bcrypt = require("bcryptjs");
+const expressJwt = require('express-jwt')
+const bodyParser = require('body-parser')
+const mongoose = require('mongoose');
+const usersRoutes = require('../routes/users')
+const productsRoutes = require('../routes/products')
+const categoriesRoutes = require('../routes/categories')
+const cartsRoutes = require('../routes/cart')
 
 const app = express()
-app.use(morgan('combined'))
-app.use(bodyParser.json())
-app.use(cors())
 
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/store_demo');
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error"));
-db.once("open", function (callback) {
-    console.log("Connection Succeeded");
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-type,Authorization');
+    next();
 });
 
-const User = require('../models/user');
+app.use(morgan('combined'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors())
 
-// Register new user
-app.post('/register', [
-    check('email').exists().withMessage('Email field is required').isEmail().withMessage('Invalid email format'),
-    check('password', 'Password field is required.').notEmpty()
-], async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json({errors: errors.array()});
-    }
-    let email = req.body.email;
-    let password = Bcrypt.hashSync(req.body.password, 10);
-    let new_user = new User({
-        email: email,
-        password: password
-    })
-    new_user.save(error => {
-        if (error) {
-            res.send(error)
-        }
-        res.send({
-            success: true,
-            message: 'User has been registered'
-        })
-    })
-})
+const jwtMiddleware = expressJwt({
+    secret: 'L,T?DpKQXu4%p4To6i4a', algorithms: ['RS256']
+});
 
-// User log in
-app.post('/login', [
-    check('email').isEmail().withMessage('Invalid email format'),
-    check('password', 'Password field is required.').notEmpty()
-], async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json({errors: errors.array()});
-    }
-    try {
-        const user = await User.findOne({email: req.body.email}).exec();
-        if (!user) {
-            return res.status(400).send({message: 'User not found.'});
-        }
-        if (!Bcrypt.compareSync(req.body.password, user.password)) {
-            return res.status(400).send({message: 'Invalid password.'});
-        }
-        res.send({message: "Logged in."});
-    } catch (e) {
-        res.status(500).send(e)
-    }
-})
+mongoose.connect('mongodb://localhost:27017/store_demo', {useNewUrlParser: true, useUnifiedTopology: true});
 
-app.listen(process.env.PORT || 8081)
+app.use(usersRoutes, productsRoutes, categoriesRoutes, cartsRoutes);
+
+app.listen(8081)

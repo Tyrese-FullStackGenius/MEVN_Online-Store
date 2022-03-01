@@ -7,7 +7,7 @@
             <v-label for="e-mail">
               E-mail
             </v-label>
-            <v-text-field name="e-mail" solo v-model="email"></v-text-field>
+            <v-text-field name="e-mail" outlined dense v-model="email"></v-text-field>
           </v-col>
         </v-row>
         <v-row>
@@ -15,7 +15,7 @@
             <v-label for="password">
               Password
             </v-label>
-            <v-text-field name="password" type="password" solo v-model="password"></v-text-field>
+            <v-text-field name="password" type="password" outlined dense v-model="password"></v-text-field>
           </v-col>
         </v-row>
         <v-row>
@@ -29,24 +29,27 @@
 </template>
 
 <script>
-import RegisterService from '@/services/RegisterService'
+import {register as registerService} from '../../services/UserServices'
 
 export default {
   name: 'Register',
   data () {
     return {
       email: null,
-      password: null
+      password: null,
+      confirmPassword: null
     }
   },
   methods: {
-    async register () {
-      await RegisterService.register({
+    register () {
+      registerService({
         email: this.email,
         password: this.password
+      }).then(res => {
+        this.$router.push({name: 'Login'}).then(() => {
+          this.$store.commit('showAlert', ['Account has been created, now please log in.'])
+        })
       })
-      this.$router.push({ name: 'Home' })
-      this.$store.commit('showAlert', ['Account has been created.'])
     }
   }
 }
